@@ -4,6 +4,10 @@ from PIL import Image
 import os
 import pickle
 import numpy as np
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.datasets import make_classification
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report
 
 st.set_page_config(layout = "wide", page_icon = 'icon.jpg', page_title='Solar Panel Dust Detection')
 
