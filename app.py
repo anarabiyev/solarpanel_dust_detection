@@ -4,10 +4,8 @@ from PIL import Image
 import os
 import pickle
 import numpy as np
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.datasets import make_classification
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import classification_report
+from serial import Serial
+import test
 
 st.set_page_config(layout = "wide", page_icon = 'icon.jpg', page_title='Solar Panel Dust Detection')
 
@@ -16,6 +14,7 @@ st.write('<p style="font-size:160%">Import the image:</p>', unsafe_allow_html=Tr
 
 image = st.file_uploader(label = '', type=["jpg", "jpeg", "png"])
 
+ans = 0
 if image:
     image = Image.open(image)
     st.image(image)
@@ -31,5 +30,7 @@ if image:
     
     prediction = model.predict(pixel_value.reshape(1, -1))
     ans = prediction[0]
-
+    stop = True; i = 0
     st.write('Result:',ans)
+    test.arduinoSender(ans)
+    
